@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="anton_ruban.fitz.registration.view.RegistrationActivity">
+
+    <LinearLayout
+        android:id="@+id/master_frame_signUp"
+        android:layout_width="240dp"
+        android:layout_height="285dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/corner_bg"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        app:layout_anchorGravity="top|center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43">
+
+        <ImageView
+            android:layout_width="69dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+
+            android:background="@drawable/t1" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email_up"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColorHint="@color/colorAccent"
+            android:theme="@style/MyStyle">
+
+            <EditText
+                android:id="@+id/field_email_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password_up"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColorHint="@color/colorAccent"
+            android:theme="@style/MyStyle"
+            app:passwordToggleDrawable="@drawable/ic_visibility_black_24dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent">
+
+            <EditText
+                android:id="@+id/field_password_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_confirmpassword"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColorHint="@color/colorAccent"
+            android:theme="@style/MyStyle"
+            app:passwordToggleDrawable="@drawable/ic_visibility_black_24dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent">
+
+            <EditText
+                android:id="@+id/field_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/lingoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/sign_up_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Sign Up"
+                android:onClick="signUp"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

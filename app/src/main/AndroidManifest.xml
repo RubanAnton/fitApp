@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="anton_ruban.fitz">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".main.view.MainActivity" />
+        <activity
+            android:name=".login.view.LoginActivity"
+            android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".BaseActivity" />
+        <activity
+            android:name=".BuilderActivity"
+            android:parentActivityName=".main.view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="anton_ruban.fitz.main.view.MainActivity" />
+        </activity>
+        <activity android:name=".nutri.NutriActivity" />
+        <activity android:name=".profile.view.ProfileActivity" />
+        <activity android:name=".club.view.CreateClubActivity" />
+        <activity android:name=".tools.view.ToolsActivity" />
+        <activity android:name=".timers.tabata.view.TabataActivity" />
+        <activity android:name=".registration.view.RegistrationActivity"></activity>
+    </application>
+
+</manifest>

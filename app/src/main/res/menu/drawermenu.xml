@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/profile"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/club"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/club" />
+    <item
+        android:id="@+id/workout"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_fitness_center_black_24px"
+        android:title="@string/program_builder" />
+    <item
+        android:id="@+id/nutrition"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_food_apple"
+        android:title="@string/nutrition" />
+    <item
+        android:id="@+id/tools"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/tools" />
+    <item
+        android:id="@+id/logout"
+        android:fontFamily="@font/qanelas"
+        android:icon="@drawable/ic_login_variant"
+        android:title="@string/sign_out" />
+</menu>

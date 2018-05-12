@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F69E8A</color>
+    <color name="colorPrimaryDark">#c16f5d</color>
+    <color name="colorAccent">#F69E8A</color>
+    <color name="bluez">#29B6F6</color>
+    <color name="greenz">#9CCC65</color>
+    <color name="red">#ef5350</color>
+    <color name="white">#ffffff</color>
+    <color name="colorGrey">#3b3e47</color>
+    <color name="transparent">#00000000</color>
+    <color name="tinted">#50c16f5d</color>
+    <color name="mainLight">#f8bbad</color>
+    <color name="lightGrey">#4E5159</color>
+
+
+    <color name="textColor">#ffffff</color>
+    <color name="loginButtonColor">#017370</color>
+    <color name="backGr">#97ffffff</color>
+    <color name="darkBack">#cd353131</color>
+    <color name="status_training_color">#ef898686</color>
+    <color name="custom_callout">#b279ffe0</color>
+
+    <color name="timeColor">#cd545454</color>
+    <color name="transparency">#6c166b54</color>
+    <color name="grey">#b3b3b3</color>
+    <color name="another_chat_message_box">#f4f4f4</color>
+
+</resources>
