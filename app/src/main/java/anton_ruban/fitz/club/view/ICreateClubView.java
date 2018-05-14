@@ -6,6 +6,8 @@ package anton_ruban.fitz.club.view;
 
 public interface ICreateClubView {
 
+    void showProgress();
+    void hideProgress();
     void finishActivity();
     void intentToMain();
 

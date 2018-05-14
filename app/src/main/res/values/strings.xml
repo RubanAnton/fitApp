@@ -70,6 +70,7 @@
     <string name="male">Male</string>
     <string name="saveLinear">Save</string>
     <string name="Cancle">Cancel</string>
+    <string name="dateOfbithDay">Date of BithDay</string>
 
     <!--Tools-->
     <string name="tabata">Tabata Timer</string>
@@ -89,5 +90,15 @@
     <string name="traing_prepaer">Training prepaer</string>
     <string name="rest_round">Rest round</string>
 
+    <string name="logOut">Log Out</string>
+
+    <!--Coach-->
+    <string name="subscribCoach">Заявки</string>
+    <string name="surscriberCoach">Подписчики</string>
+
+    <string name="subscribeButton">Subscribe</string>
+    <string name="unsubscribeButton">Unsubscribe</string>
+
+    <string name="rememberMe">Remember me</string>
 
 </resources>

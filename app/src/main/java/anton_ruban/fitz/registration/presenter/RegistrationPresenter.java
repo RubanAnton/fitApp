@@ -9,7 +9,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by antonruban on 07.05.2018.
+ @author antonruban on 07.05.2018.
  */
 
 public class RegistrationPresenter implements IRegistrationPresenter {
@@ -25,21 +25,23 @@ public class RegistrationPresenter implements IRegistrationPresenter {
     @Override
     public void registrationUser(UserRegistrationReq registrationReq) {
         serverApi = ServerUtils.serverApi();
+        view.showProgress();
         serverApi.registerUser(registrationReq).enqueue(new Callback<UserRegistrationReq>() {
             @Override
             public void onResponse(Call<UserRegistrationReq> call, Response<UserRegistrationReq> response) {
-                if(response.isSuccessful()){
-                    view.complete();
+                if(response.code() > 200 && response.code() < 300 || response.isSuccessful()){
+                    view.hideProgress();
                     view.intentLogin();
+                    view.finishActivity();
                 }else {
+                    view.hideProgress();
                     view.error();
                 }
-
             }
 
             @Override
             public void onFailure(Call<UserRegistrationReq> call, Throwable t) {
-
+                view.hideProgress();
             }
         });
     }

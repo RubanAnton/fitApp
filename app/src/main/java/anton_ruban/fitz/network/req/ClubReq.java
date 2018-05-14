@@ -1,28 +1,42 @@
 package anton_ruban.fitz.network.req;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by antonruban on 08.05.2018.
  */
 
 public class ClubReq {
 
+    @SerializedName("idClub")
     public int id;
+    @SerializedName("nameClub")
     public String nameClub;
+    @SerializedName("descriptionClub")
     public String description;
+    @SerializedName("email")
     public String emailClub;
+    @SerializedName("imagePath")
     public String imagePath;
+    @SerializedName("phone")
     public String phone;
+    @SerializedName("address")
     public String addres;
+    @SerializedName("lat")
     public float lat;
+    @SerializedName("lng")
     public float lng;
+    @SerializedName("idOwner")
     public int idOwner;
+    @SerializedName("idsCoachs")
+    public String idsCoachs;
 
-    public ClubReq(String nameClub, String description, String emailClub, String phone, String addres) {
+    public ClubReq(String nameClub, String description, String emailClub, String phone,int idOwner) {
         this.nameClub = nameClub;
         this.description = description;
         this.emailClub = emailClub;
         this.phone = phone;
-        this.addres = addres;
+        this.idOwner = idOwner;
     }
 
     public int getId() {
@@ -104,5 +118,13 @@ public class ClubReq {
 
     public void setIdOwner(int idOwner) {
         this.idOwner = idOwner;
+    }
+
+    public String getIdsCoachs() {
+        return idsCoachs;
+    }
+
+    public void setIdsCoachs(String idsCoachs) {
+        this.idsCoachs = idsCoachs;
     }
 }

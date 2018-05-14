@@ -13,6 +13,8 @@
     <color name="mainLight">#f8bbad</color>
     <color name="lightGrey">#4E5159</color>
 
+    <color name="color_card">#81646464</color>
+
 
     <color name="textColor">#ffffff</color>
     <color name="loginButtonColor">#017370</color>

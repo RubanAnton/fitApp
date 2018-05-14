@@ -38,7 +38,8 @@
         <activity android:name=".club.view.CreateClubActivity" />
         <activity android:name=".tools.view.ToolsActivity" />
         <activity android:name=".timers.tabata.view.TabataActivity" />
-        <activity android:name=".registration.view.RegistrationActivity"></activity>
+        <activity android:name=".registration.view.RegistrationActivity" />
+        <activity android:name=".coach.view.CoachActivity"></activity>
     </application>
 
 </manifest>

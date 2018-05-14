@@ -17,11 +17,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
@@ -43,8 +38,6 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
     String[] day_data = {"1 Days", "2 Days", "3 Days", "4 Days", "5 Days", "6 days", "7 Days"};
     Dialog workoutDialog;
     public List<Workout> workouts;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mRef = null;
     private ConstraintLayout constraintLayout;
     private List<Workout> workoutList;
     public RVAdapter adapter;
@@ -59,9 +52,7 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
         View emptyView = findViewById(R.id.empty_view);
         FloatingActionButton fab = findViewById(R.id.fab);
         constraintLayout = findViewById(R.id.constraintLayout);
-        mDatabase = FirebaseDatabase.getInstance();
         workouts = new LinkedList<>();
-        mRef = mDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("workouts");
         workoutList = new ArrayList<>();
         // mRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -75,30 +66,9 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
 
         ItemTouchHelper.SimpleCallback touchHelperCallBack = new RecyclerTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(touchHelperCallBack).attachToRecyclerView(rv);
-        initializeData();
 
         workoutDialog = new Dialog(this);
 
-    }
-
-    private void initializeData() {
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    Workout workout = childDataSnapshot.getValue(Workout.class);
-                    workoutList.add(workout);
-                }
-                adapter = new RVAdapter(workoutList,BuilderActivity.this);
-                rv.setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.d("NOPE", "Failed to read value.", error.toException());
-            }
-        });
     }
 
     @Override
@@ -142,7 +112,6 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
                 w.setLevel(workoutLevelSpinner.getText().toString());
                 workoutList.add(w);
                 workoutDialog.dismiss();
-                mRef.child(String.valueOf(w.getId())).setValue(w);
                 adapter.notifyDataSetChanged();
 
             }
@@ -167,20 +136,6 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
             final Workout deletedItem = workoutList.get(viewHolder.getAdapterPosition());
             final int deletedIndex = viewHolder.getAdapterPosition();
 
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid()).child("workouts").child(String.valueOf(workoutList.get(deletedIndex).getId()));
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        snap.getRef().removeValue();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e(TAG, "onCancelled", databaseError.toException());
-                }
-            });
 
             adapter.removeItem(viewHolder.getAdapterPosition());
             Snackbar snackbar = Snackbar
@@ -191,7 +146,7 @@ public class BuilderActivity extends BaseActivity implements View.OnClickListene
 
                     // undo is selected, restore the deleted item
                     adapter.restoreItem(deletedItem, deletedIndex);
-                    mRef.child(String.valueOf(workoutList.get(deletedIndex).getId())).setValue(workoutList.get(position));
+//                    mRef.child(String.valueOf(workoutList.get(deletedIndex).getId())).setValue(workoutList.get(position));
                 }
             });
             snackbar.setActionTextColor(Color.YELLOW);

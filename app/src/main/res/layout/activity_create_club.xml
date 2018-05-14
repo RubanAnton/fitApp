@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    style="@style/AppTheme2"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="anton_ruban.fitz.club.view.CreateClubActivity">
@@ -59,19 +60,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="@string/ownerCLub"
-                android:textColorHint="@color/textColor">
-
-                <EditText
-                    android:id="@+id/creatorClub"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="@string/addressClub"
                 android:textColorHint="@color/textColor">
 
@@ -117,20 +105,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/instagramClub"
-                android:textColorHint="@color/textColor">
-
-                <EditText
-                    android:id="@+id/instaClub"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textUri" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>

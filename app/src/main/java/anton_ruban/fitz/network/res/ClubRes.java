@@ -10,24 +10,26 @@ public class ClubRes {
 
     @SerializedName("idClub")
     public int idClub;
-    @SerializedName("")
+    @SerializedName("nameClub")
     public String nameClub;
-    @SerializedName("")
+    @SerializedName("descriptionClub")
     public String description;
-    @SerializedName("")
+    @SerializedName("email")
     public String emailClub;
-    @SerializedName("")
-    public String imagePath;
-    @SerializedName("")
+    @SerializedName("phone")
     public String phone;
-    @SerializedName("")
+    @SerializedName("imagePath")
+    public String imagePath;
+    @SerializedName("address")
     public String addres;
-    @SerializedName("")
+    @SerializedName("lat")
     public float lat;
-    @SerializedName("")
+    @SerializedName("lng")
     public float lng;
-    @SerializedName("")
+    @SerializedName("idOwner")
     public int idOwner;
+    @SerializedName("idsCoachs")
+    public String idsCoachs;
 
     public int getIdClub() {
         return idClub;
@@ -107,5 +109,13 @@ public class ClubRes {
 
     public void setIdOwner(int idOwner) {
         this.idOwner = idOwner;
+    }
+
+    public String getIdsCoachs() {
+        return idsCoachs;
+    }
+
+    public void setIdsCoachs(String idsCoachs) {
+        this.idsCoachs = idsCoachs;
     }
 }

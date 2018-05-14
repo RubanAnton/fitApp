@@ -1,5 +1,6 @@
 package anton_ruban.fitz.registration.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import anton_ruban.fitz.network.ServerApi;
 import anton_ruban.fitz.network.ServerUtils;
 import anton_ruban.fitz.network.req.UserRegistrationReq;
 import anton_ruban.fitz.registration.presenter.RegistrationPresenter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistrationActivity extends AppCompatActivity implements IRegistrationView{
 
@@ -22,14 +26,16 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
     private EditText confirmPassword;
     private UserRegistrationReq req;
     private RegistrationPresenter presenter;
+    public ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         serverApi = ServerUtils.serverApi();
-        presenter = new RegistrationPresenter(serverApi,this);
-
+        if(presenter == null){
+            presenter = new RegistrationPresenter(serverApi,this);
+        }
         email = findViewById(R.id.field_email_up);
         password = findViewById(R.id.field_password_up);
         confirmPassword = findViewById(R.id.field_confirm_password);
@@ -44,9 +50,21 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
     }
 
     @Override
-    public void complete() {
-        Toast.makeText(RegistrationActivity.this, "OKEY", Toast.LENGTH_SHORT).show();
+    public void showProgress() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
 
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -57,5 +75,10 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
     @Override
     public void intentLogin() {
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Override
+    public void finishActivity() {
+        finish();
     }
 }

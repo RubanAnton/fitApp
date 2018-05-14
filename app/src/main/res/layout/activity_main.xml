@@ -1,74 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="anton_ruban.fitz.main.view.MainActivity"
-    android:id="@+id/none">
+    tools:context="anton_ruban.fitz.main.view.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerMain"
         android:layout_width="match_parent"
-        android:layout_height="312dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-    <net.grobas.view.PolygonImageView
-        android:id="@+id/polygonWorkout"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginStart="44dp"
-        android:clickable="true"
-        android:elevation="4dp"
-        android:src="@drawable/test1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:poly_border="true"
-        app:poly_border_color="@android:color/white"
-        app:poly_border_width="2dp"
-        app:poly_corner_radius="5"
-        app:poly_shadow="true"
-        app:poly_shadow_color="@android:color/black"
-        app:poly_vertices="6" />
-
-    <net.grobas.view.PolygonImageView
-        android:id="@+id/polygonFood"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:clickable="true"
-        android:elevation="4dp"
-        android:src="@drawable/food"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:poly_border="true"
-        app:poly_border_color="@android:color/white"
-        app:poly_border_width="2dp"
-        app:poly_corner_radius="5"
-        app:poly_shadow="true"
-        app:poly_shadow_color="@android:color/black"
-        app:poly_vertices="6" />
-
-    <net.grobas.view.PolygonImageView
-        android:id="@+id/polygonProgress"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="44dp"
-        android:elevation="4dp"
-        android:src="@drawable/maps_poligon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:poly_border="true"
-        app:poly_border_color="@android:color/white"
-        app:poly_border_width="2dp"
-        app:poly_corner_radius="5"
-        app:poly_shadow="true"
-        app:poly_shadow_color="@android:color/black"
-        app:poly_vertices="6" />
 
 </android.support.constraint.ConstraintLayout>

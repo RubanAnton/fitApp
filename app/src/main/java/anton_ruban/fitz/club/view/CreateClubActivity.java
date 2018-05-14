@@ -2,6 +2,7 @@ package anton_ruban.fitz.club.view;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import anton_ruban.fitz.R;
 import anton_ruban.fitz.club.presenter.CreateClubPresenter;
 import anton_ruban.fitz.network.ServerApi;
 import anton_ruban.fitz.network.req.ClubReq;
+import anton_ruban.fitz.utils.PreferenceManager;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CreateClubActivity extends AppCompatActivity implements ICreateClubView {
@@ -28,13 +30,13 @@ public class CreateClubActivity extends AppCompatActivity implements ICreateClub
     private CircleImageView imageView;
     private EditText clubName;
     private EditText descriptionClub;
-    private EditText creatorClub;
-    private EditText addressClub;
     private EditText emailClub;
     private EditText phoneClub;
+    public ProgressDialog mProgressDialog;
 
     private CreateClubPresenter presenter;
     private ServerApi serverApi;
+    private PreferenceManager preferenceManager;
     private ClubReq req;
 
     @Override
@@ -45,12 +47,13 @@ public class CreateClubActivity extends AppCompatActivity implements ICreateClub
         if(presenter == null){
             presenter = new CreateClubPresenter(this,serverApi);
         }
+        if(preferenceManager == null){
+            preferenceManager = new PreferenceManager(this);
+        }
 
         imageView = findViewById(R.id.club_image);
         clubName = findViewById(R.id.clubName);
         descriptionClub = findViewById(R.id.descriptionClub);
-        creatorClub = findViewById(R.id.creatorClub);
-        addressClub = findViewById(R.id.addressClub);
         emailClub = findViewById(R.id.emailClub);
         phoneClub = findViewById(R.id.phoneClub);
 
@@ -75,10 +78,10 @@ public class CreateClubActivity extends AppCompatActivity implements ICreateClub
     public void onClickSaveClub(View view){
         String clubName_ = clubName.getText().toString();
         String desrc = descriptionClub.getText().toString();
-        String addrss = addressClub.getText().toString();
         String email = emailClub.getText().toString();
         String phone = phoneClub.getText().toString();
-        req = new ClubReq(clubName_,desrc,addrss,email,phone);
+        int idOwner  = preferenceManager.getUserId();
+        req = new ClubReq(clubName_,desrc,email,phone,idOwner);
         presenter.createClub(req);
     }
 
@@ -105,8 +108,22 @@ public class CreateClubActivity extends AppCompatActivity implements ICreateClub
         }
     }
 
-    public void onClickCreate(View view){
+    @Override
+    public void showProgress(){
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
 
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void hideProgress(){
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

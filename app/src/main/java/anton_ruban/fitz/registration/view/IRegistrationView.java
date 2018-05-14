@@ -6,7 +6,9 @@ package anton_ruban.fitz.registration.view;
 
 public interface IRegistrationView {
 
-    void complete();
+    void showProgress();
+    void hideProgress();
     void error();
     void intentLogin();
+    void finishActivity();
 }

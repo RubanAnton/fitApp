@@ -1,12 +1,18 @@
 package anton_ruban.fitz.network.req;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  @author  antonruban on 25.04.2018.
  */
 
 public class UserRegistrationReq {
+
+    @SerializedName("Email")
     public String Email;
+    @SerializedName("Password")
     public String Password;
+    @SerializedName("ConfirmPassword")
     public String ConfirmPassword;
 
     public UserRegistrationReq(String email, String password, String confirmPassword) {

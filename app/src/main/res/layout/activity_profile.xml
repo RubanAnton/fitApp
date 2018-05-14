@@ -69,18 +69,58 @@
                     android:layout_height="wrap_content" />
             </android.support.design.widget.TextInputLayout>
 
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <io.ghyeok.stickyswitch.widget.StickySwitch
+                    android:id="@+id/switchGender"
+                    android:layout_width="110dp"
+                    android:layout_height="68dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    app:ss_animationDuration="600"
+                    app:ss_animationType="line"
+                    app:ss_iconPadding="10dp"
+                    app:ss_iconSize="14dp"
+                    app:ss_leftIcon="@drawable/ic_female"
+                    app:ss_leftText=" Female"
+                    app:ss_rightIcon="@drawable/ic_male"
+                    app:ss_rightText="Male"
+                    app:ss_selectedTextSize="12sp"
+                    app:ss_sliderBackgroundColor="@color/darkBack"
+                    app:ss_switchColor="@color/colorAccent"
+                    app:ss_textColor="@color/textColor"
+                    app:ss_textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/textDateBith"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/swithcGender"
+                    android:layout_marginTop="30dp"
+                    android:hint="@string/dateOfbithDay"
+                    android:onClick="onClickDate"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="20sp"
+                    tools:ignore="UnknownId" />
+
+            </RelativeLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="@string/phoneCLub"
                 android:textColorHint="@color/textColor">
 
                 <EditText
                     android:id="@+id/phoneUser"
-                    android:inputType="phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -92,7 +132,7 @@
                 <Button
                     android:onClick="onClickSave"
                     android:textColor="@color/textColor"
-                    android:background="@color/colorPrimary"
+                    android:background="#89363636"
                     android:text="@string/saveLinear"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
@@ -100,7 +140,7 @@
                 <Button
                     android:onClick="onCLickCancel"
                     android:textColor="@color/textColor"
-                    android:background="@color/colorPrimary"
+                    android:background="#89363636"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"

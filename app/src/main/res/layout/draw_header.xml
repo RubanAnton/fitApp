@@ -17,21 +17,15 @@
         app:civ_border_color="@color/colorAccent"
         android:layout_gravity="center"
         />
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/userEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        android:id="@+id/userN"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:id="@+id/userE"/>
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:background="#72494747"
+        android:textStyle="bold" />
 
 </LinearLayout>
