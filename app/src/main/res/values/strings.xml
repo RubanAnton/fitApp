@@ -3,6 +3,9 @@
     <string name="sign_out">Sign Out</string>
 
     <string name="loading">Loading…</string>
+    <string name="watchVideo">Watch video</string>
+    <string name="addToList">Add exercise</string>
+    <string name="whichSelect">What to do?</string>
     <string name="signed_in">Signed In</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
@@ -12,21 +15,52 @@
     <string name="action_settings">Setting</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="watchVido">Video</string>
+    <string name="allDone">All done. Congratulations!</string>
+    <string name="resolveExercise">Done</string>
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="emailpassword_title_text">Email and Password</string>
     <string name="reg">Don\'t have an account? <b>Sign Up</b></string>
     <string name="signup">Sign Up</string>
     <string name="login">Login</string>
+    <string name="chooseGender">Choose your gender</string>
+    <string name="chooseDateBirth">Choose your date birth</string>
+    <string name="notSelected">Not selected</string>
+    <string name="noChooseen">Please, fill all fields.</string>
+    <string name="detailTraining">To close this training you need to execute all this exercises.\n Exercises which is done are marked with green color.\n When all exercises are done, training is assigned status "Resolved".</string>
+    <string name="alreadyAdded">This exercise is already added.</string>
+    <string name="createTraining">Create training</string>
+    <string name="isSubscribed">Approve request</string>
+    <string name="nameTraining">Training\'s name</string>
+    <string name="dateTraining">Choose training\'s date</string>
+    <string name="selectedAddr">Selected address is</string>
+    <string name="confirm">Confirm</string>
+    <string name="buildWay">Build way</string>
+    <string name="chooseAction">Choose action.</string>
+    <string name="ok">Ok</string>
+    <string name="oneedMaps">We need map to indicate your\'s club address.</string>
+    <string name="selectAddr">Please select club\'s address.</string>
+    <string name="descriptionTraining">Training\'s description</string>
+    <string name="chooseCategory">Choose training\'s category</string>
+    <string name="warmup">WARM UP</string>
+    <string name="emom1">EMOM</string>
+    <string name="amrap">AMRAP</string>
+    <string name="dateChoose">Choose date</string>
+    <string name="longClickMap">To choose location please long click on place.</string>
+    <string name="amrap_15">AMRAP 15</string>
     <item name="visible" type="id" />
     <item name="masked" type="id" />
-
+    <string name="manageClub">Manage club</string>
     <string name="open">Open</string>
+    <string name="youOwner">You are owner.</string>
+    <string name="youCoach">You are coach.</string>
     <string name="close">Close</string>
     <string name="nutrition"><![CDATA[Nutrition & Macros]]></string>
     <string name="profile">Profile</string>
     <string name="tools">Tools</string>
+    <string name="findMap">Find on map</string>
     <string name="club">Create club</string>
-    <string name="program_builder">Program Manager</string>
+    <string name="program_builder">My Training</string>
     <string name="home">Home</string>
     <string name="sarahha_eren">Sarrah Eren</string>
     <string name="sarraheren_gmail_com">SarrahEren@gmail.com</string>
@@ -72,11 +106,13 @@
     <string name="Cancle">Cancel</string>
     <string name="dateOfbithDay">Date of BithDay</string>
 
+    <string name="updateClubBtn">Update</string>
+
     <!--Tools-->
     <string name="tabata">Tabata Timer</string>
     <string name="emom">Emom</string>
     <string name="Alarm">Alarm</string>
-    <string name="exercise">Exercise</string>
+    <string name="exercise">Club Location</string>
 
     <!--Timers-->
     <string name="prepeare">Preparation</string>
@@ -93,12 +129,60 @@
     <string name="logOut">Log Out</string>
 
     <!--Coach-->
-    <string name="subscribCoach">Заявки</string>
-    <string name="surscriberCoach">Подписчики</string>
+    <string name="subscribCoach">Request</string>
+    <string name="surscriberCoach">Subscriber</string>
+    <string name="trainingForUser">Assign a workout</string>
+    <string name="checkTraining">Check training</string>
+
+    <string name="selectAddress">Indicate address your club</string>
+    <string name="subscribe">Indicate address your club</string>
+    <string name="unsubscribe">Indicate address your club</string>
+    <string name="inprogress">Indicate address your club</string>
+    <string name="selectTrainerError">Please, select trainer.</string>
+    <string name="selectTrainerError2">For managing club you need to add trainer. This person should be in this system.</string>
+
+    <string name="isTrainerAlreadyError">Not possible.</string>
+    <string name="isTrainerAlreadyError2">This user is already trainer. Try to connect with this person by email:</string>
+    <string name="orPhone"> or phone:</string>
+    <string name="select">Select</string>
 
     <string name="subscribeButton">Subscribe</string>
     <string name="unsubscribeButton">Unsubscribe</string>
 
     <string name="rememberMe">Remember me</string>
+    <string name="title_activity_maps_club">Map</string>
+    <string name="selectCoach">Select coach for your club</string>
+    <string name="selectButton">Select coach</string>
+    <string name="waiting_done_coach">In progress</string>
+
+    <string name="continue_coach">Сontinue as</string>
+    <string name="coachCon">Coach</string>
+    <string name="userCon">User</string>
+    <string name="inProgress">In progress</string>
+    <string name="title_activity_coach_pager">CoachPagerActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_s">Map</string>
+
+    <string name="updateClubCoach">Coach club: </string>
+    <string name="updateOkClub">Update okey</string>
+
+    <string name="noMyTraining">You have not training</string>
+
+    <string name="historyTraining">History training user</string>
+    <string name="selectHistory">Select training from history</string>
+    <string name="selectBtnHist">Select training</string>
+
+    <string name="resolvedTraining">Resolved</string>
+    <string name="unresolvedTraining">Unresolved</string>
+
+    <!--Timers-->
+    <string name="Timers">Timers</string>
+    <string name="stopwatch">Stopwatch</string>
+
+    <string name="start_delay__" formatted="false">Отсрочка старта:\n%dч %dмин %dсек</string>
+    <string name="sound_every__" formatted="false">Звук каждые:\n%dч %dмин %dсек</string>
+    <string name="click_to_set_start_delay">Нажмите, чтобы указать время, перед началом работы секундомера</string>
+    <string name="click_to_set_sound_every">Нажмите, чтобы указать время, через которое будет звучать звуковой сигнал</string>
 
 </resources>

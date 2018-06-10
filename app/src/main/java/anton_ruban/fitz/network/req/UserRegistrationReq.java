@@ -15,10 +15,8 @@ public class UserRegistrationReq {
     @SerializedName("ConfirmPassword")
     public String ConfirmPassword;
 
-    public UserRegistrationReq(String email, String password, String confirmPassword) {
-        Email = email;
-        Password = password;
-        ConfirmPassword = confirmPassword;
+    public UserRegistrationReq() {
+
     }
 
     public String getEmail() {

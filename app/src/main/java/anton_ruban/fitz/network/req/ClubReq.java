@@ -31,12 +31,7 @@ public class ClubReq {
     @SerializedName("idsCoachs")
     public String idsCoachs;
 
-    public ClubReq(String nameClub, String description, String emailClub, String phone,int idOwner) {
-        this.nameClub = nameClub;
-        this.description = description;
-        this.emailClub = emailClub;
-        this.phone = phone;
-        this.idOwner = idOwner;
+    public ClubReq() {
     }
 
     public int getId() {

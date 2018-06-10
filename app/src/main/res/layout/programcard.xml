@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/club_name"
+            android:id="@+id/userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -83,7 +83,7 @@
             android:id="@+id/workout_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/club_name"
+            android:layout_below="@+id/userEmail"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/workout_photo"
             android:fontFamily="@font/qanelas"
@@ -94,7 +94,7 @@
             android:id="@+id/workout_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/club_name"
+            android:layout_below="@+id/userEmail"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/workout_type"
@@ -106,7 +106,7 @@
             android:id="@+id/workout_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/club_name"
+            android:layout_below="@+id/userEmail"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/workout_level"

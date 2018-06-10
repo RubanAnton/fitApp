@@ -25,11 +25,12 @@ public class RegistrationPresenter implements IRegistrationPresenter {
     @Override
     public void registrationUser(UserRegistrationReq registrationReq) {
         serverApi = ServerUtils.serverApi();
+        String type = "application/json";
         view.showProgress();
-        serverApi.registerUser(registrationReq).enqueue(new Callback<UserRegistrationReq>() {
+        serverApi.registerUser(registrationReq).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<UserRegistrationReq> call, Response<UserRegistrationReq> response) {
-                if(response.code() > 200 && response.code() < 300 || response.isSuccessful()){
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() >= 200 && response.code() < 300 || response.isSuccessful() || response.code() == 200){
                     view.hideProgress();
                     view.intentLogin();
                     view.finishActivity();
@@ -40,7 +41,7 @@ public class RegistrationPresenter implements IRegistrationPresenter {
             }
 
             @Override
-            public void onFailure(Call<UserRegistrationReq> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 view.hideProgress();
             }
         });

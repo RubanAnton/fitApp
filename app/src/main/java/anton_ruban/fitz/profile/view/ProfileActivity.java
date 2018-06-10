@@ -3,24 +3,36 @@ package anton_ruban.fitz.profile.view;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.orhanobut.logger.Logger;
 
+import org.joda.time.DateTime;
+
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import anton_ruban.fitz.R;
 import anton_ruban.fitz.main.view.MainActivity;
@@ -46,15 +58,24 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText lastname;
     private EditText phoneUser;
     private TextView textDate;
+    private Button dateBTN;
     private StickySwitch gender;
     private UserResponse response;
     private int mYear, mMonth, mDay;
     private Date dateDB;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+    private StorageReference userImagesRef;
+    public ProgressDialog mProgressDialog;
+    private Date dateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        try {
+            getSupportActionBar().hide();
+        } catch (Exception error){ }
         imageView = findViewById(R.id.profile_image);
         email = findViewById(R.id.email);
         firstname = findViewById(R.id.firstname);
@@ -62,11 +83,14 @@ public class ProfileActivity extends AppCompatActivity {
         phoneUser = findViewById(R.id.phoneUser);
         textDate = findViewById(R.id.textDateBith);
         gender = findViewById(R.id.switchGender);
+        dateBTN = findViewById(R.id.dateBTN);
+
 
         serverApi = ServerUtils.serverApi();
         if(preferenceManager == null){
             preferenceManager = new PreferenceManager(this);
         }
+        showProgress();
         serverApi.getUserByID(preferenceManager.getUserToken(),preferenceManager.getUserId()).enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -75,21 +99,24 @@ public class ProfileActivity extends AppCompatActivity {
                     email.setEnabled(false);
                     firstname.setText(response.body().getFirstName());
                     lastname.setText(response.body().getLastName());
+                    dateBTN.setText(response.body().getBithDate());
                     phoneUser.setText(response.body().getPhone());
-                    textDate.setText((CharSequence) response.body().getBithDate());
                     if(response.body().getGender() == 0){
                         gender.setDirection(StickySwitch.Direction.LEFT);
                     }
                     if(response.body().getGender() == 1){
                         gender.setDirection(StickySwitch.Direction.RIGHT);
                     }
+                    hideProgress();
                 }else {
+                    hideProgress();
                     Logger.d(response.errorBody());
                 }
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
+                hideProgress();
                 Logger.d("Error");
             }
         });
@@ -111,51 +138,119 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        userImagesRef = storageRef.child("users/" + preferenceManager.getUserId() + ".jpg");
+        if (preferenceManager.getImageUser() != null) {
+            try {
+                imageView.setImageBitmap(preferenceManager.getImageUser());
+            } catch (Exception error) {}
+        }
+    }
+
     public void onClickDate(View view){
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        textDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        dateBTN.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        dateTime = new Date();
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+
+
+
     }
 
     public void onClickSave(View view){
-        String email_ = email.getText().toString();
-        String firstName = firstname.getText().toString();
-        String lastName = lastname.getText().toString();
-        String phone_ = phoneUser.getText().toString();
+        dateTime = new Date();
+        response = new UserResponse();
+        response.setUserID(preferenceManager.getUserId());
+        response.setEmail(email.getText().toString());
+        response.setFirstName(firstname.getText().toString());
+        response.setLastName(lastname.getText().toString());
+        response.setPhone(phoneUser.getText().toString());
+        response.setBithDate("2018-06-10T20:20:05.4533823+02:00");
         int gender_type = 0;
         if(gender.getDirection() == StickySwitch.Direction.LEFT){
-            gender_type = 0;
+            response.setGender(0);
         }
         if (gender.getDirection() == StickySwitch.Direction.RIGHT){
-            gender_type = 1;
+            response.setGender(1);
         }
-        response = new UserResponse(preferenceManager.getUserId(),email_,gender_type,firstName,lastName,phone_);
-        serverApi.updateUser(preferenceManager.getUserToken(),preferenceManager.getUserId(),response).enqueue(new Callback<UserResponse>() {
+        showProgress();
+
+
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        final Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = userImagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if(response.code() > 200 && response.code() < 300 || response.isSuccessful()){
-                    Toast.makeText(ProfileActivity.this, "Update user profile OKEY", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                    finish();
-                }else {
-                    Toast.makeText(ProfileActivity.this, "Incorrect date", Toast.LENGTH_SHORT).show();
-                }
+            public void onFailure(@NonNull Exception exception) {
+                hideProgress();
+                Toast.makeText(ProfileActivity.this, "Problem with uploading image.", Toast.LENGTH_SHORT).show();
             }
-
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                preferenceManager.setImageUser(bitmap);
+                response.setImagePath(taskSnapshot.getDownloadUrl().toString());
+                serverApi.updateUser(preferenceManager.getUserToken(),preferenceManager.getUserId(),response).enqueue(new Callback<UserResponse>() {
+                    @Override
+                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                        if(response.code() > 200 && response.code() < 300 || response.isSuccessful()){
+                            Toast.makeText(ProfileActivity.this, "Update user profile OKEY", Toast.LENGTH_SHORT).show();
+                            hideProgress();
+                            startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                            finish();
+                        }else {
+                            hideProgress();
+                            Toast.makeText(ProfileActivity.this, "Incorrect date", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<UserResponse> call, Throwable t) {
+                        hideProgress();
+                    }
+                });
             }
         });
+
+
+
+
+
+
+    }
+
+    public void showProgress(){
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgress(){
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     public void onCLickCancel(View view){
@@ -184,4 +279,6 @@ public class ProfileActivity extends AppCompatActivity {
             imageView.setImageBitmap(photo);
         }
     }
+
+
 }

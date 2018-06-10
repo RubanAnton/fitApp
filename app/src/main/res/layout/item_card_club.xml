@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/club_name"
+                    android:id="@+id/userEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/workout_photo"
@@ -73,15 +73,34 @@
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/isOwnerOrCoach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/qanelas"
+                    android:singleLine="true"
+                    android:visibility="gone"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/subcribeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:background="@drawable/corner_bgc"
                 android:text="@string/subscribeButton"
-                android:textColor="@color/colorPrimary" />
+                android:fontFamily="@font/qanelas"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="end|bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="0dp"
+                android:elevation="8dp"/>
+
         </LinearLayout>
 
 

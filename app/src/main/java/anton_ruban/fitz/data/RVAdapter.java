@@ -69,7 +69,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         WorkoutViewHolder(View itemView) {
             super(itemView);
             cv = itemView.findViewById(R.id.foregroundView);
-            nameOfWorkout = itemView.findViewById(R.id.club_name);
+            nameOfWorkout = itemView.findViewById(R.id.userEmail);
             typeOfWorkout = itemView.findViewById(R.id.workout_type);
             level = itemView.findViewById(R.id.workout_level);
             days = itemView.findViewById(R.id.workout_days);

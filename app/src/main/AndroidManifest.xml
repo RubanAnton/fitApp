@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,14 +19,15 @@
         <activity android:name=".main.view.MainActivity" />
         <activity
             android:name=".login.view.LoginActivity"
-            android:theme="@style/AppTheme2">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".utils.BaseActivity" />
         <activity
             android:name=".BuilderActivity"
             android:parentActivityName=".main.view.MainActivity">
@@ -34,12 +36,61 @@
                 android:value="anton_ruban.fitz.main.view.MainActivity" />
         </activity>
         <activity android:name=".nutri.NutriActivity" />
-        <activity android:name=".profile.view.ProfileActivity" />
+        <activity
+            android:name=".profile.view.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".club.view.CreateClubActivity" />
-        <activity android:name=".tools.view.ToolsActivity" />
-        <activity android:name=".timers.tabata.view.TabataActivity" />
-        <activity android:name=".registration.view.RegistrationActivity" />
-        <activity android:name=".coach.view.CoachActivity"></activity>
+        <activity
+            android:name=".registration.view.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity android:name=".coach.view.CoachActivity" />
+        <activity android:name=".club.updateClub.view.UpdateClubActivity" />
+        <activity android:name=".coach.CreateTraining.view.SingleCreateTrainingActivity" />
+        <activity android:name=".coach.CreateTraining.view.SelectSingleExerActivity" />
+        <activity android:name=".mytraining.view.MyTrainingActivity" />
+        <activity android:name=".coach.trainig.TrainingCreationActivity" />
+        <activity android:name=".coach.trainig.ExerciseCreationActivity" />
+        <activity
+            android:name=".coach.trainig.VideoViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DialogStyle" />
+        <activity android:name=".mytraining.TrainingDetailActivity" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".club.view.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".coach.trainig.HistoryActivityActivity" />
+        <activity android:name=".coach.notifyTraining.NotifyTrainingActivity" />
+        <activity
+            android:name=".timers.TimersActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".timers.TabataActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".timers.AmrapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".timers.EmomActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".timers.StopWatchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
     </application>
 
 </manifest>

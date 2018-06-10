@@ -16,12 +16,11 @@ public class SubscriberRequest {
     private int idOwner;
     @SerializedName("status")
     private int status;
+    @SerializedName("userSubscribeID")
+    private int userSubscriber;
 
-    public SubscriberRequest(int idSubscriber, int idClub, int idOwner, int status) {
-        this.idSubscriber = idSubscriber;
-        this.idClub = idClub;
-        this.idOwner = idOwner;
-        this.status = status;
+    public SubscriberRequest() {
+
     }
 
     public int getIdSubscriber() {
@@ -54,5 +53,13 @@ public class SubscriberRequest {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getUserSubscriber() {
+        return userSubscriber;
+    }
+
+    public void setUserSubscriber(int userSubscriber) {
+        this.userSubscriber = userSubscriber;
     }
 }

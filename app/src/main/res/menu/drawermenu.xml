@@ -31,6 +31,11 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/tools" />
     <item
+        android:id="@+id/findMap"
+        android:fontFamily="@font/qanelas"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/findMap" />
+    <item
         android:id="@+id/logout"
         android:fontFamily="@font/qanelas"
         android:icon="@drawable/ic_login_variant"

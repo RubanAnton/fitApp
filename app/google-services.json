@@ -1,35 +1,39 @@
 {
   "project_info": {
-    "project_number": "815745920299",
-    "firebase_url": "https://myfit-1b1v.firebaseio.com",
-    "project_id": "myfit-1b1v",
-    "storage_bucket": "myfit-1b1v.appspot.com"
+    "project_number": "67257964902",
+    "firebase_url": "https://fitz-6cd6b.firebaseio.com",
+    "project_id": "fitz-6cd6b",
+    "storage_bucket": "fitz-6cd6b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:815745920299:android:0bc2f1d95a3b8f44",
+        "mobilesdk_app_id": "1:67257964902:android:0bc2f1d95a3b8f44",
         "android_client_info": {
           "package_name": "vyvital.myfit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "815745920299-poemsatrsa2to6v548qb5r6le1jn4ufe.apps.googleusercontent.com",
+          "client_id": "67257964902-47muffcgdcn1s0sq7596dqp6pj401gbn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "vyvital.myfit",
-            "certificate_hash": "cfcfc2403437efa82b942893cd264c629ca5bc31"
+            "certificate_hash": "51580282f3bd314db981c366fe56e99c402923a6"
           }
         },
         {
-          "client_id": "815745920299-fa5op1q66pbi5dtf8ods449s2o710j2j.apps.googleusercontent.com",
+          "client_id": "67257964902-1v2dq5vjd7ne9vieh8skevttsa3qm646.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "67257964902-1v2dq5vjd7ne9vieh8skevttsa3qm646.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBEd3X9iZsA_u7hpIelI9jACtDFVKl--Mw"
+          "current_key": "AIzaSyAkZq0iS5OHOm0W7urAuSe7MupEUNWdS4E"
         }
       ],
       "services": {
@@ -40,7 +44,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "815745920299-fa5op1q66pbi5dtf8ods449s2o710j2j.apps.googleusercontent.com",
+              "client_id": "67257964902-1v2dq5vjd7ne9vieh8skevttsa3qm646.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

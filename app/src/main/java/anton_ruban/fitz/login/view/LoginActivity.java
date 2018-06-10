@@ -1,18 +1,28 @@
 package anton_ruban.fitz.login.view;
 
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.webkit.URLUtil;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.wang.avi.AVLoadingIndicatorView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import anton_ruban.fitz.coach.view.CoachActivity;
 import anton_ruban.fitz.main.view.MainActivity;
@@ -26,6 +36,7 @@ import anton_ruban.fitz.utils.PreferenceManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,17 +45,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEmailField;
     private EditText mPasswordField;
     private ServerApi serverApi;
+    private ImageView image;
     private PreferenceManager preferenceManager;
     private CheckBox checkRemember;
-
+    private int[] myImageList = new int[]{R.drawable.back2, R.drawable.back3, R.drawable.back1};
+    private int countImage = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            getSupportActionBar().hide();
+        } catch (Exception error){ }
 
         mEmailField = findViewById(R.id.field_email);
         mPasswordField = findViewById(R.id.field_password);
         serverApi = ServerUtils.serverApi();
+        image = findViewById(R.id.carousel);
 
         if(preferenceManager == null){
             preferenceManager = new PreferenceManager(this);
@@ -53,6 +70,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
         findViewById(R.id.email_create_account_button).setOnClickListener(this);
         checkRemember = findViewById(R.id.checkRemember);
+
+        final Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
+        final Animation fadeOut = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_out);
+
+        image.startAnimation(fadeIn);
+        try {
+            fadeIn.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    image.setImageDrawable(getDrawable(myImageList[countImage]));
+                    if (countImage != 2) {
+                        countImage++;
+                    } else {
+                        countImage = 0;
+                    }
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                    image.startAnimation(fadeOut);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+
+                    image.startAnimation(fadeIn);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+        } catch (Exception eror) {}
     }
 
     @Override
@@ -68,8 +130,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
     public void login(String username,String password,String grant_type) {
-        customDialog();
+        showProgressDialog();
         serverApi = ServerUtils.serverApi();
         serverApi.getUserToken(username,password,grant_type).enqueue(new Callback<UserTokenResp>() {
             @Override
@@ -79,6 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         mEmailField.setError("");
                         mPasswordField.setError("");
                     } else {
+
                         preferenceManager.setUserToken(response.body().userToken);
                         preferenceManager.setUserId(response.body().userID);
                         if(checkRemember.isChecked()){
@@ -87,15 +151,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         serverApi.getUserByID(preferenceManager.getUserToken(),preferenceManager.getUserId()).enqueue(new Callback<UserResponse>() {
                             @Override
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                preferenceManager.setUserIsOwner(response.body().getIsOwner());
+                                preferenceManager.setUserName(response.body().getEmail());
+                                if(response.body().getImagePath() != null && URLUtil.isValidUrl(response.body().getImagePath())) {
+                                     Glide.with(LoginActivity.this)
+                                             .asBitmap()
+                                             .load(response.body().getImagePath())
+                                             .into(new SimpleTarget<Bitmap>() {
+                                            @Override
+                                                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                             preferenceManager.setImageUser(resource);
+                                         }
+                                     });
+                                } else {
+                                    preferenceManager.setImageUserNull();
+                                }
                                 if(response.isSuccessful()){
                                     if (response.body().getIsCoach() == 0){
-                                        preferenceManager.setUserName(response.body().getEmail());
                                         hideProgressDialog();
                                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
+                                         finish();
                                     }else{
-                                        startActivity(new Intent(LoginActivity.this, CoachActivity.class));
-                                        hideProgressDialog();
+                                        preferenceManager.setCoachClub(response.body().getIsCoach());
+                                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(LoginActivity.this);
+                                        builder.setTitle(getResources().getString(R.string.continue_coach))
+                                                .setCancelable(false)
+                                                .setPositiveButton(getResources().getString(R.string.coachCon),
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int id) {
+                                                                startActivity(new Intent(LoginActivity.this, CoachActivity.class));
+                                                                hideProgressDialog();
+                                                                finish();
+                                                                dialog.cancel();
+                                                            }
+                                                        });
+                                        builder.setNegativeButton(getResources().getString(R.string.userCon), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                hideProgressDialog();
+                                                finish();
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                        android.support.v7.app.AlertDialog alert = builder.create();
+                                        alert.show();
                                     }
                                 }
                             }
@@ -133,14 +233,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void customDialog(){
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.load,null);
-        AVLoadingIndicatorView avi = mView.findViewById(R.id.avi);
-        mBuilder.setView(mView);
-        avi.show();
-    }
-
     private boolean validateForm() {
         boolean valid = true;
 
@@ -161,4 +253,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return valid;
     }
+
+
+
 }

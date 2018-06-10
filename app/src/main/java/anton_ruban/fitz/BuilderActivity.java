@@ -12,7 +12,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,6 +27,7 @@ import anton_ruban.fitz.data.EmptyRecyclerView;
 import anton_ruban.fitz.data.RVAdapter;
 import anton_ruban.fitz.data.RecyclerTouchHelper;
 import anton_ruban.fitz.data.models.Workout;
+import anton_ruban.fitz.utils.BaseActivity;
 
 
 public class BuilderActivity extends BaseActivity implements View.OnClickListener, RecyclerTouchHelper.RecyclerItemTouchHelperListener {

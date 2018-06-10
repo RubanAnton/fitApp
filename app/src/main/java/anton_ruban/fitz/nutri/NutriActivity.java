@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import anton_ruban.fitz.BaseActivity;
+import anton_ruban.fitz.utils.BaseActivity;
 import anton_ruban.fitz.R;
 
 public class NutriActivity extends BaseActivity {

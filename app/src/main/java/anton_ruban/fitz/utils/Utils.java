@@ -15,9 +15,9 @@ import anton_ruban.fitz.R;
 public class Utils {
 
     public static class TimeSpinnerPicker {
-        NumberPicker hp;
-        NumberPicker mp;
-        NumberPicker sp;
+        com.shawnlin.numberpicker.NumberPicker hp;
+        com.shawnlin.numberpicker.NumberPicker mp;
+        com.shawnlin.numberpicker.NumberPicker sp;
         private Dialog d;
         private OnTimeChangeListener onTimeChangeListener;
         private int h = 0;
@@ -27,7 +27,7 @@ public class Utils {
         public TimeSpinnerPicker(Context context) {
             d = new Dialog(context);
             d.setCancelable(true);
-            d.setContentView(R.layout.dialog_time_picker);
+            d.setContentView(R.layout.dialog_duration_picker);
             hp = d.findViewById(R.id.hoursPicker);
             mp = d.findViewById(R.id.minutesPicker);
             sp = d.findViewById(R.id.secondsPicker);

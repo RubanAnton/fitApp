@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class  Exercise implements Parcelable{
+public class  Exercise implements Parcelable {
 
 
     private int id;

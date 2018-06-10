@@ -3,11 +3,13 @@
     <color name="colorPrimary">#F69E8A</color>
     <color name="colorPrimaryDark">#c16f5d</color>
     <color name="colorAccent">#F69E8A</color>
+
     <color name="bluez">#29B6F6</color>
     <color name="greenz">#9CCC65</color>
     <color name="red">#ef5350</color>
     <color name="white">#ffffff</color>
     <color name="colorGrey">#3b3e47</color>
+    <color name="colorProgress">#959697</color>
     <color name="transparent">#00000000</color>
     <color name="tinted">#50c16f5d</color>
     <color name="mainLight">#f8bbad</color>
@@ -18,6 +20,7 @@
 
     <color name="textColor">#ffffff</color>
     <color name="loginButtonColor">#017370</color>
+    <color name="darckGRAY">#2c2d2d</color>
     <color name="backGr">#97ffffff</color>
     <color name="darkBack">#cd353131</color>
     <color name="status_training_color">#ef898686</color>
